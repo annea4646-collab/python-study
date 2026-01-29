@@ -9,14 +9,12 @@ except Exception as e:
 class StudentScoreReport:
     def __init__(self):
         self.student_list = []
-
+        user = os.getenv("DB_USER")
+        pw = os.getenv("DB_PASSWORD")
+        dsn = os.getenv("DB_DSN")
         # DB 연결 및 테이블 생성
         try:
-            self.conn = oracledb.connect(
-                user="anne",
-                password="1234",
-                dsn="localhost:1521/xe"
-             )
+            self.conn = oracledb.connect(user=user, password=pw, dsn=dsn)
             self.cursor = self.conn.cursor()
         
             self.cursor.execute('''
