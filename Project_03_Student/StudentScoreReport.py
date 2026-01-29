@@ -1,4 +1,6 @@
+import os
 import oracledb
+from dotenv import load_dotenv
 from Student import Student
 
 try:
@@ -6,9 +8,12 @@ try:
 except Exception as e:
     pass
 
+load_dotenv()
+
 class StudentScoreReport:
     def __init__(self):
         self.student_list = []
+        
         user = os.getenv("DB_USER")
         pw = os.getenv("DB_PASSWORD")
         dsn = os.getenv("DB_DSN")
