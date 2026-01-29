@@ -45,7 +45,10 @@ class StudentScoreReport:
     def add_to_db(self, s):
         try:
             # SQL 쿼리로 데이터 삽입
-            sql = "INSERT INTO students (id, name, kor, eng, math, total, avg) VALUES (student_seq.NEXTVAL,:1, :2, :3, :4, :5, :6)"
+            sql = """
+                INSERT INTO students (id, name, kor, eng, math, total, avg) 
+                VALUES (student_seq.NEXTVAL, :1, :2, :3, :4, :5, :6)
+            """
 
             data = (s.name, s.korscore, s.engscore, s.mathscore, s.total_score(), s.avg_score())
 
