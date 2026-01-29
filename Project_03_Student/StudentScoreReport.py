@@ -13,7 +13,7 @@ load_dotenv()
 class StudentScoreReport:
     def __init__(self):
         self.student_list = []
-        
+
         user = os.getenv("DB_USER")
         pw = os.getenv("DB_PASSWORD")
         dsn = os.getenv("DB_DSN")
@@ -45,10 +45,9 @@ class StudentScoreReport:
     def add_to_db(self, s):
         try:
             # SQL 쿼리로 데이터 삽입
-            sql = "INSERT INTO students (id, name, kor, eng, math, total, avg) VALUES (:1, :2, :3, :4, :5, :6, :7)"
+            sql = "INSERT INTO students (id, name, kor, eng, math, total, avg) VALUES (student_seq.NEXTVAL,:1, :2, :3, :4, :5, :6)"
 
-            student_id = len(self.student_list)
-            data = (student_id, s.name, s.korscore, s.engscore, s.mathscore, s.total_score(), s.avg_score())
+            data = (s.name, s.korscore, s.engscore, s.mathscore, s.total_score(), s.avg_score())
 
             self.cursor.execute(sql, data)
             self.conn.commit()
